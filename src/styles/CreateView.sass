@@ -1,0 +1,83 @@
+@import 'Base.sass'
+
+.create-view
+  .card
+    padding: $globalSpacing
+    margin: $globalSpacing 0
+    border: $borderStyle
+    width: 520px
+
+    .btn
+      float: right
+      &:nth-of-type(1)
+        margin-right: 0
+
+    .form-row
+      line-height: $lineHeight
+      margin-bottom: $globalSpacing/2
+      vertical-align: middle
+      label
+        width: 18%
+
+    .custom-dropdown
+      position: relative
+      display: inline-block;
+      vertical-align: middle
+      line-height: $lineHeight
+      width: 82%
+      &::before,
+      &::after
+        content: "";
+        position: absolute;
+        pointer-events: none;
+      &::after
+        content: "\25BC";
+        height: 1em;
+        font-size: $h3;
+        line-height: 1;
+        right: 16px
+        top: 50%;
+        margin-top: -6px;
+        color: $mid-grey
+      &::before
+        width: 50px;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border-radius: 0 2px 2px 0;
+        border: $borderStyle;
+        transition: all .5s ease
+      select
+        display: inline-block
+        background: white
+        color: $black
+        border: none
+        border-radius: 0px
+        text-indent: $globalSpacing/2
+        text-overflow: ''
+        -moz-appearance: none
+        -webkit-appearance: none
+        appearance: none
+        font-size: $h3
+        line-height: $lineHeight
+        border: $borderStyle
+        width: 100%
+        &:focus,
+        &:active,
+          outline: none
+          overflow: hidden
+
+    &.is-parent
+      min-height: 200px
+
+    &.is-child
+      min-height: 250px
+      .custom-dropdown.is-condition-q
+        width: 45%
+        margin-right: $globalSpacing
+      .custom-dropdown.is-condition-a
+        width: 32%
+      input.is-condition-a
+        width: 32%
+        position: relative
+        top: 2px

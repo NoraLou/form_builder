@@ -1,18 +1,17 @@
-
-//@import '../node_modules/bulma/sass/base/minireset.sass';
-
+$hover-bkgrd: #DCDCDC
 $light-grey: #d8d8d8
 $mid-grey: #979797
 $black: #000000
 
-$globalSpacing: 30px
-$maxWidthContainer: 860px
+$globalSpacing: 20px
+$lineHeight: $globalSpacing*2
+$maxWidthContainer: 800px
 $borderStyle: $mid-grey solid 1.5px
 $h1: 32px
-$h2: 22px
-$h3: 20px
-$h4: 18px
-$h5: 16px
+$h2: 20px
+$h3: 18px
+$h4: 16px
+$h5: 14px
 
 
 // CSS _Reset
@@ -53,7 +52,7 @@ html, body
     color: inherit
     text-decoration: none
   a:hover
-    color: blue
+    background: $hover-bkgrd
 
 
 //BASE
@@ -74,7 +73,39 @@ $Font_sizes: $h1 $h2 $h3 $h4 $h5
     letter-spacing: 1px
     font-weight: normal
 
-//NAV
+.btn
+  border: $borderStyle
+  padding: $globalSpacing/2
+  margin: $globalSpacing/2
+  text-align: center
+  min-width: $globalSpacing*5
+  background: $light-grey
+  transition: all .5s ease
+  &:focus,
+  &:active,
+    outline: none
+  &:hover
+    background: lighten($light-grey, 10%)
+
+.btn-large
+  padding: $globalSpacing $globalSpacing*2
+
+label
+  display: inline-block
+  font-size: $h3
+  line-height: $globalSpacing*2
+
+input
+  display: inline-block
+  line-height: $lineHeight
+  border: $borderStyle
+  width: 82%
+  color: $black
+  font-size: $h3
+  padding: 0 $globalSpacing/2
+
+
+//SHARED
 nav
   width: 100%
   border-bottom: $borderStyle
@@ -83,37 +114,20 @@ nav
     max-width: $maxWidthContainer
     min-width: $maxWidthContainer
     h1
-      padding: $globalSpacing
+      padding: $globalSpacing + $globalSpacing/2
     .tabs-nav
       a
         display: inline-block
         position: relative
         top: 1.5px
-        width: 140px
+        width: 120px
         margin-right: $globalSpacing
         border: $borderStyle
         padding: $globalSpacing/3
         font-size: $h2
         text-align: center
+        transition: all .5s ease
         &.is-active
           background: $light-grey
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        &:hover
+          background: lighten($light-grey, 10%)
