@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
-import { Switch, Route, withRouter, Link, NavLink } from 'react-router-dom'
+import { Switch, Route, NavLink } from 'react-router-dom'
 import CreateView from './CreateView';
 import Preview from './Preview';
 import ExportView from './ExportView';
+import formInputs from '../utils/data';
+
+
+window.localStorage.setItem('formInputs', JSON.stringify(formInputs));
+
+
 
 
 class App extends Component {
+
+  // constructor(props){
+  //   super(props)
+  //   // this.getForm = this.getForm.bind(this)
+       // this.addInput/ this.addSubInput
+       // this.removeInput
+  // }
+
 
   render() {
     return (

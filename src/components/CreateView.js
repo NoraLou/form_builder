@@ -1,111 +1,54 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import '../styles/CreateView.css'
-
+// import PropTypes from 'prop-types'
+import ParentQ from './ParentQ'
 
 class CreateView extends Component {
 
-  componentDidMount() {
-    // console.log("calling compDidMount in the Create View")
-    // console.log("this.props createView: ", this.props)
+  // static propTypes = {
+  //   books:  PropTypes.array.isRequired,
+  //   updateBooks: PropTypes.func.isRequired,
+  //   getBookShelf: PropTypes.func.isRequired
+  // }
+
+  state = {
+    // modal: isClosed
   }
+
+  formInputs = JSON.parse(localStorage.getItem('formInputs')) || [];
+
+
+  componentDidMount() {
+    console.log("create-view componentDidMount")
+    console.log("formInputs :", this.formInputs)
+  }
+
+  onChangeInput() {
+    console.log("onChangeInput")
+  }
+
+  onChangeSelect() {
+    console.log("onChangeSelect")
+  }
+
+  // const renderChildComps = (parent) => {
+  //   return
+  // }
+
 
 
   render() {
+
     return (
+
       <div className="create-view">
-        <div className="card is-parent">
-          <div className="form-row">
-            <label>Question</label>
-            <input
-              readOnly
-              value="Do you own a car?">
-            </input>
-          </div>
-          <div className="form-row">
-            <label>Type</label>
-            <div className="custom-dropdown">
-              <select>
-                  <option>Sherlock Holmes</option>
-                  <option>The Great Gatsby</option>
-                  <option>V for Vendetta</option>
-                  <option>The Wolf of Wallstreet</option>
-                  <option>Quantum of Solace</option>
-              </select>
-            </div>
-          </div>
-            <button className='btn h5'>Delete</button>
-            <button className='btn h5'>Add Sub-Input</button>
-        </div>
 
-        <div className="card is-child">
-          <div className="form-row">
-            <label>Condition</label>
-            <div className="custom-dropdown is-condition-q">
-              <select>
-                <option>Greater Than</option>
-                <option>Less Than</option>
-                <option>Equals</option>
-              </select>
-            </div>
-            <div className="custom-dropdown is-condition-a">
-              <select>
-                <option>Yes</option>
-                <option>No</option>
-              </select>
-            </div>
-          </div>
-          <div className="form-row">
-            <label>Question</label>
-            <input></input>
-          </div>
-          <div className="form-row">
-            <label>Type</label>
-            <div className="custom-dropdown">
-              <select>
-               <option>Greater Than</option>
-                <option>Less Than</option>
-                <option>Equals</option>
-              </select>
-            </div>
-          </div>
-            <button className='btn h5'>Delete</button>
-            <button className='btn h5'>Add Sub-Input</button>
-        </div>
-
-        <div className="card is-child">
-          <div className="form-row">
-            <label>Condition</label>
-            <div className="custom-dropdown is-condition-q">
-              <select>
-                <option>Greater Than</option>
-                <option>Less Than</option>
-                <option>Equals</option>
-              </select>
-            </div>
-            <input className="is-condition-a" value="Toyota">
-
-            </input>
-          </div>
-          <div className="form-row">
-            <label>Question</label>
-            <input></input>
-          </div>
-          <div className="form-row">
-            <label>Type</label>
-            <div className="custom-dropdown">
-              <select>
-               <option>Greater Than</option>
-                <option>Less Than</option>
-                <option>Equals</option>
-              </select>
-            </div>
-          </div>
-            <button className='btn h5'>Delete</button>
-            <button className='btn h5'>Add Sub-Input</button>
-        </div>
-
+        {this.formInputs.length && this.formInputs.map((i) => (
+          <ParentQ
+            key={i.key}
+            i={i}
+           />
+        ))}
 
         <button className='btn btn-large h2'>Add Input</button>
       </div>
