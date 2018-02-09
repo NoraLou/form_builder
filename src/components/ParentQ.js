@@ -1,5 +1,5 @@
 import React from 'react'
-import SubQ from './SubQ'
+import SubQS from './SubQS'
 // import PropTypes from 'prop-types'
 
 const ParentQ = (props) => {
@@ -30,13 +30,14 @@ const ParentQ = (props) => {
         <button className='btn h5'>Delete</button>
         <button className='btn h5'>Add Sub-Input</button>
        </div>
-        { i.subQs && i.subQs.length && i.subQs.map( (subQ) => (
-          <SubQ
+        { i.subQs && (
+          <SubQS
             parentKey={i.key}
-            acceptConditions={i.values}
-            subQ={subQ}
+            parentValues={i.values}
+            children={i.subQs}
+            indentVal={0}
           />
-        ))}
+        )}
     </div>
   )
 }
