@@ -15,25 +15,28 @@ const SubQS = (props) => {
   const { children, parentValues, indentVal } = props
 
   return (
-    <div>
+      <div>
+
       { children.map( (child, i) => {
+
         let meetsCondition = parentValues.includes(child.condition)
         let nestingVal = meetsCondition ? indentVal + 20 : 0
+
         return (
-          <div>
-            <div style={{'marginLeft': nestingVal + 'px'}} key={`${uuid.v4()}`}>{child.question}</div>
-            { child.subQs && (
-              <SubQS
-                children={child.subQs}
-                parentValues={child.values}
-                indentVal={nestingVal}
-                key={`${uuid.v4()}`}
-              />
-            )}
+          <div key={`${uuid.v4()}`}>
+            <div style={{'marginLeft': nestingVal + 'px'}}>{child.question}</div>
+              { child.subQs && (
+                <SubQS
+                  children={child.subQs}
+                  parentValues={child.values}
+                  indentVal={nestingVal}
+                />
+              )}
           </div>
           )
       })}
-    </div>
+
+      </div>
   )
 
 }

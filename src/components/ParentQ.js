@@ -44,7 +44,6 @@ const ParentQ = (props) => {
             children={i.subQs}
             parentValues={i.values}
             indentVal={0}
-            key={`${uuid.v4()}`}
           />
         )}
     </div>
