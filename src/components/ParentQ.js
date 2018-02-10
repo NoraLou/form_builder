@@ -2,10 +2,19 @@ import React from 'react'
 import SubQS from './SubQS'
 // import PropTypes from 'prop-types'
 
+import uuid from 'uuid'
+
+
+const makeKey = (parent) => {
+  console.log("makeKey :", makeKey)
+  console.log(`${parent}-${uuid.v4()}`)
+  return `${parent}-${uuid.v4()}`
+
+}
+
+
 const ParentQ = (props) => {
-
   const { i } = props
-
   return (
     <div>
       <div className="card is-parent">
@@ -32,10 +41,10 @@ const ParentQ = (props) => {
        </div>
         { i.subQs && (
           <SubQS
-            parentKey={i.key}
-            parentValues={i.values}
             children={i.subQs}
+            parentValues={i.values}
             indentVal={0}
+            key={`${uuid.v4()}`}
           />
         )}
     </div>

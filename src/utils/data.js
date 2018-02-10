@@ -3,24 +3,24 @@
 const formInputs =
 [
    {
-    question: "Do you own a car", key:"1", type: "boolean", values:['yes', 'no'],
+    question: "Do you own a car", key:1, type: "boolean", values:['yes', 'no'],
       subQs: [
 
-        { condition:'yes', question: 'what is your cars model?', key:"1.1", type: 'text', values:['ford', 'toyota'],
+        { condition:'yes', question: 'what is your cars model?', type: 'text', values:['ford', 'toyota'],
 
           subQs: [
-            { condition: 'ford', question:'what color is your ford', key:"1.2,", type: 'text', values:['green']
+            { condition: 'ford', question:'what color is your ford', type: 'text', values:['green']
             },
 
-            { condition: 'ford', question:'how many wheels on your ford', key:"1.3", type:'number', values:['greater than 4'],
+            { condition: 'ford', question:'how many wheels on your ford', type:'number', values:['greater than 4'],
 
               subQs: [
-                { condition: 'greater than 4', question: 'is your ford road legal?',  key:"1.3.1", type: "boolean", values:['yes', 'no'] }
+                { condition: 'greater than 4', question: 'is your ford road legal?',  type: "boolean", values:['yes', 'no'] }
               ]
             },
 
             {
-              condition: 'toyota', question:'has your toyota been recalled ?',  key:"1.4", type: 'boolean', values: ['yes', 'no']
+              condition: 'toyota', question:'has your toyota been recalled ?', type: 'boolean', values: ['yes', 'no']
             }
           ]
         },
