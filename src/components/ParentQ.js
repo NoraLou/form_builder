@@ -32,7 +32,7 @@ const ParentQ = (props) => {
             <select readOnly value={i.type}>
               <option value="boolean">Yes/No</option>
               <option value="text">Text</option>
-              <option value="number">Number</option>
+              <option value="num">Number</option>
             </select>
           </div>
         </div>
