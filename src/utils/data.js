@@ -3,13 +3,13 @@
 const formInputs =
 [
    {
-    question: "Do you own a car", key:"1", type: "boolean", parenQAnswers:['yes', 'no'],
+    question: "Do you own a car", key:"1", type: "boolean", parenQAnswers:['yes'],
       subQs: [
 
         { condition:'equals', subQAnswer:'yes', question: 'what is your cars model?', key:"1.1", type: 'text', parenQAnswers:['ford', 'toyota'],
 
           subQs: [
-            { condition: 'equals', subQAnswer:'ford', question:'what color is your ford', key:"1.2,", type: 'text', parenQAnswers:['green']
+            { condition: 'equals', subQAnswer:'ford', question:'what color is your ford', key:"1.2,", type: 'text'
             },
 
             { condition: 'equals', subQAnswer:'ford', question:'how many wheels on your ford', key:"1.3", type:'num', parenQAnswers:['greaterThan_4'],

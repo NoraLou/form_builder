@@ -98,6 +98,7 @@ const SubQS = (props) => {
                 <button className='btn h5'>Delete</button>
                 <button className='btn h5'>Add Sub-Input</button>
               </div>
+
               { child.subQs && (
                 <SubQS
                   children={child.subQs}
