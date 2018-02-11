@@ -42,8 +42,9 @@ const ParentQ = (props) => {
         { i.subQs && (
           <SubQS
             children={i.subQs}
-            parentValues={i.values}
+            parenQAnswers={i.parenQAnswers}
             indentVal={0}
+            parentType={i.type}
           />
         )}
     </div>

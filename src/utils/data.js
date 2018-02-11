@@ -3,24 +3,24 @@
 const formInputs =
 [
    {
-    question: "Do you own a car", key:1, type: "boolean", values:['yes', 'no'],
+    question: "Do you own a car", key:"1", type: "boolean", parenQAnswers:['yes', 'no'],
       subQs: [
 
-        { condition:'yes', question: 'what is your cars model?', type: 'text', values:['ford', 'toyota'],
+        { condition:'equals', subQAnswer:'yes', question: 'what is your cars model?', key:"1.1", type: 'text', parenQAnswers:['ford', 'toyota'],
 
           subQs: [
-            { condition: 'ford', question:'what color is your ford', type: 'text', values:['green']
+            { condition: 'equals', subQAnswer:'ford', question:'what color is your ford', key:"1.2,", type: 'text', parenQAnswers:['green']
             },
 
-            { condition: 'ford', question:'how many wheels on your ford', type:'number', values:['greater than 4'],
+            { condition: 'equals', subQAnswer:'ford', question:'how many wheels on your ford', key:"1.3", type:'num', parenQAnswers:['greaterThan_4'],
 
               subQs: [
-                { condition: 'greater than 4', question: 'is your ford road legal?',  type: "boolean", values:['yes', 'no'] }
+                { condition: 'greaterThan', subQAnswer:'5', question: 'is your ford road legal?',  key:"1.3.1", type: "boolean", parenQAnswers:['yes', 'no'] }
               ]
             },
 
             {
-              condition: 'toyota', question:'has your toyota been recalled ?', type: 'boolean', values: ['yes', 'no']
+              condition: 'equals', subQAnswer: 'toyota', question:'has your toyota been recalled ?',  key:"1.4", type: 'boolean'
             }
           ]
         },
@@ -28,11 +28,11 @@ const formInputs =
     },
 
    {
-    question: "what year was your building built", key:"2", type: "number", value: "greater than 1930",
+    question: "what year was your building built", key:"2", type: "num"
    },
 
    {
-    question: "what is your company name", key:"3", type: "text", value: "acme inc."
+    question: "what is your company name", key:"3", type: "text"
    },
 
 ]
