@@ -3,11 +3,11 @@ import { Route, NavLink } from 'react-router-dom'
 import CreateView from './CreateView';
 import Preview from './Preview';
 import ExportView from './ExportView';
-import formInputs from '../utils/data';
+// import formInputs from '../utils/data';
 
 
 // window.localStorage.setItem('formInputs', JSON.stringify(formInputs));
-// window.localStorage.clear()
+window.localStorage.clear()
 
 
 
@@ -17,7 +17,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.getformInputs = this.getformInputs.bind(this)
-    this.addInput = this.addInput.bind(this)
+    this.addParentInput = this.addParentInput.bind(this)
     // this.addSubInput = this.addInput.bind(this)
     this.state = {
       form : []
@@ -27,14 +27,20 @@ class App extends Component {
   // state = { form: []}
 
   getformInputs() {
-    let form = JSON.parse(localStorage.getItem('formInputs')) || [];
+    //let form = JSON.parse(localStorage.getItem('formInputs')) || [];
     //console.log("calling getformInputs :",  formInputs)
-    this.setState( () => ({ form }))
+    // this.setState( () => ({ form }))
 
   }
 
-  addInput(inputObject) {
+  addParentInput(inputObject) {
     this.setState((currState) => ({ form : currState.push(inputObject) } ))
+
+  }
+
+  updateInput(key, inputObject) {
+    //let newValue = this.state.form[key] = inputObject
+    // this.setState( (currState)  => ({form}))
   }
 
   render() {
@@ -70,7 +76,7 @@ class App extends Component {
             <Route exact path="/" render={ ()=> (
               <CreateView
                 form={this.state.form}
-                addInput={this.addInput}
+                addParentInput={this.addParentInput}
                 getformInputs={this.getformInputs}
               />
             )}/>
@@ -78,7 +84,7 @@ class App extends Component {
             <Route exact path="/preview" render={ ()=> (
               <Preview
                 formInputs={this.state.form}
-                addInput={this.addInput}
+                addParentInput={this.addParentInput}
                 getformInputs={this.getformInputs}
               />
             )}/>
@@ -86,7 +92,7 @@ class App extends Component {
             <Route exact path="/export" render={ ()=> (
               <ExportView
                 formInputs={this.state.form}
-                addInput={this.addInput}
+                addParentInput={this.addParentInput}
                 getformInputs={this.getformInputs}
               />
             )}/>

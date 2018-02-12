@@ -11,9 +11,18 @@ class CreateView extends Component {
   //   getBookShelf: PropTypes.func.isRequired
   // }
 
-  // state = {
-  //   // modal: isClosed
-  // }
+  state = {
+    inEdit: false,
+    inCreateNew: false
+  }
+
+  //When we click on the add Button we enter the in this.state.isCreateNew
+  //when this.state.isCreateNew
+  // ... we get an empty input box.. with no value...
+  // ... we make a value...
+  // ... ... check for value... and check for value...
+  //... when we have both values ...
+  // we call the
 
 
   componentDidMount() {
@@ -33,14 +42,17 @@ class CreateView extends Component {
   }
 
 
-  onChangeInput() {
-    console.log("onChangeInput")
-  }
+  // onChangeInput() {
+  //   console.log("onChangeInput")
+  // }
 
-  onChangeSelect() {
-    console.log("onChangeSelect")
-  }
+  // onChangeSelect() {
+  //   console.log("onChangeSelect")
+  // }
 
+  createNew() {
+    this.setState({inCreateNew : true })
+  }
 
 
   // const renderChildComps = (parent) => {
@@ -51,7 +63,8 @@ class CreateView extends Component {
 
   render() {
 
-    const { form, addInput } = this.props
+    const { form, modifyParentInput } = this.props
+    const { inCreateNew } = this.state
 
     return (
 
@@ -59,14 +72,22 @@ class CreateView extends Component {
 
         { form.length > 0 && form.map((i) => (
           <ParentQ
+            modifyParentInput={modifyParentInput}
             key={i.key}
             i={i}
            />
         ))}
 
-        <button className='btn btn-large h2'
+        { inCreateNew && (
+          <div>
+            <ParentQ modifyParentInput={modifyParentInput}/>
+          </div>
+        )}
 
-        >Add Input</button>
+        <button className='btn btn-large h2'
+          onClick ={()=>this.createNew()}>
+          Add Input
+        </button>
       </div>
     )
   }
