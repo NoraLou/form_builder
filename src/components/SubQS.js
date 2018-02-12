@@ -55,59 +55,65 @@ const SubQS = (props) => {
       <div>
 
       { children.map( (child, i) => {
-          let nestingValue  = indentVal + 20
+        let meetsCondition = parentType === 'num'
+          ? testNumberValues(child.subQAnswer, parenQAnswers[0])
+          : parenQAnswers.includes(child.subQAnswer)
 
           return (
             <div key={`${uuid.v4()}`}>
-              <div style={{marginLeft:`${nestingValue}px`}} className="card is-child">
+              { meetsCondition
+                ? <div>
+                    <div style={{marginLeft:`${indentVal}px`}} className="card is-child">
+                      <div className="form-row">
+                        <label>Condition</label>
+                        <div className="custom-dropdown is-condition-q">
+                          <select readOnly
+                            value={ findParentCondition(parentType, parenQAnswers) }>
+                            <option value="greaterThan">Greater Than</option>
+                            <option value="lessThan">Less Than</option>
+                            <option value="equals">Equals</option>
+                          </select>
+                        </div>
+                        <input className="is-condition-a"
+                          value={ expectVal(parentType, parenQAnswers,child.subQAnswer)}
+                          readOnly>
+                        </input>
+                      </div>
 
-                <div className="form-row">
-                  <label>Condition</label>
-                  <div className="custom-dropdown is-condition-q">
-                    <select readOnly
-                      value={ findParentCondition(parentType, parenQAnswers) }>
-                      <option value="greaterThan">Greater Than</option>
-                      <option value="lessThan">Less Than</option>
-                      <option value="equals">Equals</option>
-                    </select>
+                      <div className="form-row">
+                        <label>Question</label>
+                        <input readOnly
+                          value={child.question}>
+                        </input>
+                      </div>
+
+                      <div className="form-row">
+                        <label>Type</label>
+                        <div className="custom-dropdown">
+                          <select readOnly
+                            value={child.type}>
+                            <option value="num">Number</option>
+                            <option value="text">Text</option>
+                            <option value="boolean">Yes/No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <button className='btn h5'>Delete</button>
+                      <button className='btn h5'>Add Sub-Input</button>
+                    </div>
+
+                    { child.subQs && (
+                      <SubQS
+                        children={child.subQs}
+                        parenQAnswers={child.parenQAnswers}
+                        parentType={child.type }
+                        indentVal={indentVal + 20}
+                      />
+                    )}
                   </div>
-                  <input className="is-condition-a"
-                    value={ expectVal(parentType, parenQAnswers,child.subQAnswer)}
-                    readOnly>
-                  </input>
-                </div>
-
-                <div className="form-row">
-                  <label>Question</label>
-                  <input readOnly
-                    value={child.question}>
-                  </input>
-                </div>
-
-                <div className="form-row">
-                  <label>Type</label>
-                  <div className="custom-dropdown">
-                    <select readOnly
-                      value={child.type}>
-                      <option value="num">Number</option>
-                      <option value="text">Text</option>
-                      <option value="boolean">Yes/No</option>
-                    </select>
-                  </div>
-                </div>
-                <button className='btn h5'>Delete</button>
-                <button className='btn h5'>Add Sub-Input</button>
-              </div>
-
-              { child.subQs && (
-                <SubQS
-                  children={child.subQs}
-                  parenQAnswers={child.parenQAnswers}
-                  parentType={child.type }
-                  indentVal={nestingValue}
-                />
-              )}
-            </div>
+                : null
+              }
+            </div>// uuid
           )
 
       })}

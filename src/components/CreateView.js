@@ -11,17 +11,27 @@ class CreateView extends Component {
   //   getBookShelf: PropTypes.func.isRequired
   // }
 
-  state = {
-    // modal: isClosed
-  }
-
-  formInputs = JSON.parse(localStorage.getItem('formInputs')) || [];
+  // state = {
+  //   // modal: isClosed
+  // }
 
 
   componentDidMount() {
-    console.log("create-view componentDidMount")
-    console.log("formInputs :", this.formInputs)
+    this.props.getformInputs()
+    // console.log("componentDidMount***************")
+    // console.log("this.props : ", this.props)
+    // console.log("componentDidMount***************")
   }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props !== nextProps) {
+      this.props = nextProps
+      // console.log("componentWillReceiveProps***************")
+      // console.log("this.props : ", this.props)
+      // console.log("NextProps*******************************")
+    }
+  }
+
 
   onChangeInput() {
     console.log("onChangeInput")
@@ -31,7 +41,7 @@ class CreateView extends Component {
     console.log("onChangeSelect")
   }
 
-  addParentQ
+
 
   // const renderChildComps = (parent) => {
   //   return
@@ -41,18 +51,22 @@ class CreateView extends Component {
 
   render() {
 
+    const { form, addInput } = this.props
+
     return (
 
       <div className="create-view">
 
-        {this.formInputs.length && this.formInputs.map((i) => (
+        { form.length > 0 && form.map((i) => (
           <ParentQ
             key={i.key}
             i={i}
            />
         ))}
 
-        <button className='btn btn-large h2'>Add Input</button>
+        <button className='btn btn-large h2'
+
+        >Add Input</button>
       </div>
     )
   }
