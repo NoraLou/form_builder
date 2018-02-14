@@ -1,6 +1,6 @@
 
 
-const formInputs =
+const form =
 [
    {
     question: "Do you own a car", key:"1", type: "boolean", parenQAnswers:['yes'],
@@ -37,7 +37,7 @@ const formInputs =
 
 ]
 
-export default formInputs
+export default form
 
 // const nestingIncrement = 20px
 

@@ -62,10 +62,13 @@
         line-height: $lineHeight
         border: $borderStyle
         width: 100%
-        &:focus,
-        &:active,
-          outline: none
-          overflow: hidden
+        &.invalid
+          background: rgba(255,215,0, 0.15)
+        // &:focus,
+        // &:active,
+        //   outline: none
+        //   overflow: hidden
+
 
     &.is-parent
       min-height: 200px
@@ -81,3 +84,5 @@
         width: 32%
         position: relative
         top: 2px
+
+

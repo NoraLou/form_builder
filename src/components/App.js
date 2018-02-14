@@ -3,20 +3,16 @@ import { Route, NavLink } from 'react-router-dom'
 import CreateView from './CreateView';
 import Preview from './Preview';
 import ExportView from './ExportView';
-// import formInputs from '../utils/data';
+//import form from '../utils/data';
 
-
-// window.localStorage.setItem('formInputs', JSON.stringify(formInputs));
-window.localStorage.clear()
-
-
-
+//window.localStorage.clear()
+//window.localStorage.setItem('form', JSON.stringify(form));
 
 class App extends Component {
 
   constructor(props) {
     super(props)
-    this.getformInputs = this.getformInputs.bind(this)
+    this.getForm = this.getForm.bind(this)
     this.addParentInput = this.addParentInput.bind(this)
     // this.addSubInput = this.addInput.bind(this)
     this.state = {
@@ -24,24 +20,30 @@ class App extends Component {
     }
   }
 
-  // state = { form: []}
-
-  getformInputs() {
-    //let form = JSON.parse(localStorage.getItem('formInputs')) || [];
-    //console.log("calling getformInputs :",  formInputs)
-    // this.setState( () => ({ form }))
-
+  getForm() {
+    let form = JSON.parse(localStorage.getItem('form')) || [];
+    // console.log("form :", form)
+    this.setState( () => ({ form }))
+    return form
   }
+
+  // just add one for now...
+  // deal with adding a key and checking for values later...
 
   addParentInput(inputObject) {
-    this.setState((currState) => ({ form : currState.push(inputObject) } ))
+
+    //console.log("inputObject :", inputObject)
+    const {form} = this.state
+    const key = form.length
+    form.push(inputObject)
+    this.setState(()=>({form}))
+    localStorage.setItem('form', JSON.stringify(form));
+    //console.log("after adding Parent Input :", this.state.form)
+
 
   }
 
-  updateInput(key, inputObject) {
-    //let newValue = this.state.form[key] = inputObject
-    // this.setState( (currState)  => ({form}))
-  }
+
 
   render() {
     return (
@@ -77,7 +79,7 @@ class App extends Component {
               <CreateView
                 form={this.state.form}
                 addParentInput={this.addParentInput}
-                getformInputs={this.getformInputs}
+                getForm={this.getForm}
               />
             )}/>
 
@@ -85,7 +87,7 @@ class App extends Component {
               <Preview
                 formInputs={this.state.form}
                 addParentInput={this.addParentInput}
-                getformInputs={this.getformInputs}
+                getForm={this.getForm}
               />
             )}/>
 
@@ -93,7 +95,7 @@ class App extends Component {
               <ExportView
                 formInputs={this.state.form}
                 addParentInput={this.addParentInput}
-                getformInputs={this.getformInputs}
+                getForm={this.getForm}
               />
             )}/>
 

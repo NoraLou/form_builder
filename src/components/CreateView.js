@@ -5,6 +5,8 @@ import ParentQ from './ParentQ'
 
 class CreateView extends Component {
 
+
+
   // static propTypes = {
   //   books:  PropTypes.array.isRequired,
   //   updateBooks: PropTypes.func.isRequired,
@@ -12,7 +14,6 @@ class CreateView extends Component {
   // }
 
   state = {
-    inEdit: false,
     inCreateNew: false
   }
 
@@ -26,44 +27,24 @@ class CreateView extends Component {
 
 
   componentDidMount() {
-    this.props.getformInputs()
-    // console.log("componentDidMount***************")
-    // console.log("this.props : ", this.props)
-    // console.log("componentDidMount***************")
+    this.props.getForm()
   }
 
   componentWillReceiveProps(nextProps) {
     if(this.props !== nextProps) {
       this.props = nextProps
-      // console.log("componentWillReceiveProps***************")
-      // console.log("this.props : ", this.props)
-      // console.log("NextProps*******************************")
+
     }
   }
-
-
-  // onChangeInput() {
-  //   console.log("onChangeInput")
-  // }
-
-  // onChangeSelect() {
-  //   console.log("onChangeSelect")
-  // }
 
   createNew() {
     this.setState({inCreateNew : true })
   }
 
 
-  // const renderChildComps = (parent) => {
-  //   return
-  // }
-
-
-
   render() {
 
-    const { form, modifyParentInput } = this.props
+    const { form, addParentInput } = this.props
     const { inCreateNew } = this.state
 
     return (
@@ -72,7 +53,7 @@ class CreateView extends Component {
 
         { form.length > 0 && form.map((i) => (
           <ParentQ
-            modifyParentInput={modifyParentInput}
+            addParentInput={addParentInput}
             key={i.key}
             i={i}
            />
@@ -80,7 +61,7 @@ class CreateView extends Component {
 
         { inCreateNew && (
           <div>
-            <ParentQ modifyParentInput={modifyParentInput}/>
+            <ParentQ addParentInput={addParentInput}/>
           </div>
         )}
 
