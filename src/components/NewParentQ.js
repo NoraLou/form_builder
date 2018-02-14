@@ -6,17 +6,15 @@ const defaultState = {
     question:"",
     type: "none",
     isValid: true,
+    isCreateNew: false,
     inEdit: true,
-    inCreateNew: false,
     touched: {
-      question: false,
-      type: false
+      'question': false,
+      'type': false
     }
-  }
+}
 
-
-
-class ParentQ extends Component {
+class NewParentQ extends Component {
 
   constructor(props) {
     super(props)
@@ -25,17 +23,8 @@ class ParentQ extends Component {
     }
   }
 
-
-  // set the props to the state
-
   componentDidMount() {
-    //if we pass are passing down a value... then set this to be edited...
-    if(this.props.i){
-      this.setState( () => ({
-        ...this.props.i,
-        inEdit: false
-      }))
-    }
+
 
   }
 
@@ -50,7 +39,6 @@ class ParentQ extends Component {
     this.state.inEdit = true
     this.setState({
       [e.target.name] : e.target.value,
-      inEdit : true
     })
   }
 
@@ -58,7 +46,6 @@ class ParentQ extends Component {
   handleBlur = (e) => {
 
     this.state.touched[e.target.name] = true
-    this.state.inEdit = true
     let checkVal = this.state[e.target.name]
     let isfieldValid = this.inputValid(checkVal)
 
@@ -101,70 +88,71 @@ class ParentQ extends Component {
 
   createNew(){
     this.setState(()=>({
-      createNew: true
+      isCreateNew: true
+    }))
+  }
+
+  setDefault(){
+    this.setState(()=> ({
+      ...defaultState
     }))
   }
 
 
   render () {
 
-    const { i, addParentInput } = this.props
-
       return (
+
         <div>
-          <div className="card is-parent" style={ this.state.inEdit ? {'border': 'solid 2px blue'} : {} }>
-            <div className="form-row">
-            <label>Question</label>
-              <input
-                name="question"
-                onChange={this.fieldChange}
-                onBlur={this.handleBlur}
-                value={this.state.question}>
-              </input>
-            </div>
-            <div className="form-row">
-              <label>Type</label>
-              <div className="custom-dropdown">
-                <select
-                  name="type"
+          {this.state.isCreateNew && (
+            <div className="card is-parent" style={{'border': 'solid 2px blue' }}>
+              <div className="form-row">
+              <label>Question</label>
+                <input
+                  name="question"
                   onChange={this.fieldChange}
                   onBlur={this.handleBlur}
-                  value={this.state.type}>
-                  <option value="none" disabled> Select type...</option>
-                  <option value="boolean">Yes/No</option>
-                  <option value="text">Text</option>
-                  <option value="num">Number</option>
-                </select>
+                  value={this.state.question}>
+                </input>
+              </div>
+              <div className="form-row">
+                <label>Type</label>
+                <div className="custom-dropdown">
+                  <select
+                    name="type"
+                    onChange={this.fieldChange}
+                    onBlur={this.handleBlur}
+                    value={this.state.type}>
+                    <option value="none" disabled> Select type...</option>
+                    <option value="boolean">Yes/No</option>
+                    <option value="text">Text</option>
+                    <option value="num">Number</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+              {!this.state.isValid && (
+                <h4> Please check that both values are selected</h4>
+              )}
+                <button className='btn h5' onClick={()=> this.setDefault()}>Delete</button>
               </div>
             </div>
-            { this.state.inEdit
-              ? <div>
-                  {!this.state.isValid && (
-                    <h4> Please check that both values are selected</h4>
-                  )}
-                </div>
-              : <div>
-                  <button className='btn h5'>Delete</button>
-                  <button className='btn h5'>Add Sub-Input</button>
-                </div>
-            }
-           </div>
-            { i && i.subQs && (
-              <SubQS
-                children={i.subQs}
-                parenQAnswers={i.parenQAnswers}
-                indentVal={0}
-                parentType={i.type}
-              />
-            )}
+          )}
+
+          <button className='btn btn-large h2'
+            onClick ={()=>this.createNew()}>
+            Add Input
+          </button>
+
+
         </div>
       )
     }
 }
 
-ParentQ.propTypes = {
+NewParentQ.propTypes = {
   // book:  PropTypes.object.isRequired,
   // updateBook: PropTypes.func.isRequired
 }
 
-export default ParentQ;
+export default NewParentQ;

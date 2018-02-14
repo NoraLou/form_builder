@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import '../styles/CreateView.css'
 // import PropTypes from 'prop-types'
 import ParentQ from './ParentQ'
+import NewParentQ from './NewParentQ'
+
 
 class CreateView extends Component {
-
-
 
   // static propTypes = {
   //   books:  PropTypes.array.isRequired,
@@ -16,14 +16,6 @@ class CreateView extends Component {
   state = {
     inCreateNew: false
   }
-
-  //When we click on the add Button we enter the in this.state.isCreateNew
-  //when this.state.isCreateNew
-  // ... we get an empty input box.. with no value...
-  // ... we make a value...
-  // ... ... check for value... and check for value...
-  //... when we have both values ...
-  // we call the
 
 
   componentDidMount() {
@@ -56,19 +48,12 @@ class CreateView extends Component {
             addParentInput={addParentInput}
             key={i.key}
             i={i}
+            mode={this.state.createNew}
            />
         ))}
 
-        { inCreateNew && (
-          <div>
-            <ParentQ addParentInput={addParentInput}/>
-          </div>
-        )}
+        <NewParentQ addParentInput={addParentInput}/>
 
-        <button className='btn btn-large h2'
-          onClick ={()=>this.createNew()}>
-          Add Input
-        </button>
       </div>
     )
   }
