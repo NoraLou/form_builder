@@ -5,8 +5,8 @@ import Preview from './Preview';
 import ExportView from './ExportView';
 //import form from '../utils/data';
 
-//window.localStorage.clear()
-//window.localStorage.setItem('form', JSON.stringify(form));
+///window.localStorage.setItem('form', JSON.stringify(form));
+window.localStorage.clear()
 
 class App extends Component {
 
@@ -14,7 +14,7 @@ class App extends Component {
     super(props)
     this.getForm = this.getForm.bind(this)
     this.addParentInput = this.addParentInput.bind(this)
-    // this.addSubInput = this.addInput.bind(this)
+    this.addSubInput = this.addSubInput.bind(this)
     this.state = {
       form : []
     }
@@ -31,16 +31,25 @@ class App extends Component {
   // deal with adding a key and checking for values later...
 
   addParentInput(inputObject) {
+    console.log('inputObject :', inputObject)
 
-    //console.log("inputObject :", inputObject)
     const {form} = this.state
-    const key = form.length
-    form.push(inputObject)
+
+    if (inputObject.key !== undefined ) {
+      console.log("inputObject.key")
+      form[inputObject.key] = inputObject
+    } else {
+      inputObject['key'] = form.length
+      form.push(inputObject)
+    }
+
     this.setState(()=>({form}))
     localStorage.setItem('form', JSON.stringify(form));
-    //console.log("after adding Parent Input :", this.state.form)
 
+  }
 
+  addSubInput(parentKey, inputObject) {
+    console.log(`parentKey ${parentKey}, inputObject ${inputObject}`)
   }
 
 
@@ -80,22 +89,19 @@ class App extends Component {
                 form={this.state.form}
                 addParentInput={this.addParentInput}
                 getForm={this.getForm}
+                addSubInput={this.addSubInput}
               />
             )}/>
 
             <Route exact path="/preview" render={ ()=> (
               <Preview
-                formInputs={this.state.form}
-                addParentInput={this.addParentInput}
-                getForm={this.getForm}
+                form={this.state.form}
               />
             )}/>
 
             <Route exact path="/export" render={ ()=> (
               <ExportView
-                formInputs={this.state.form}
-                addParentInput={this.addParentInput}
-                getForm={this.getForm}
+                form={this.state.form}
               />
             )}/>
 

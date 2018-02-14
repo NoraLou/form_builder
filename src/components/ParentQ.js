@@ -1,19 +1,7 @@
 import React, { Component } from 'react'
 import SubQS from './SubQS'
+import NewSubQ from './NewSubQ'
 // import PropTypes from 'prop-types'
-
-const defaultState = {
-    question:"",
-    type: "none",
-    isValid: true,
-    inEdit: true,
-    inCreateNew: false,
-    touched: {
-      question: false,
-      type: false
-    }
-  }
-
 
 
 class ParentQ extends Component {
@@ -21,7 +9,9 @@ class ParentQ extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ...defaultState
+      isValid: true,
+      inEdit: false,
+      addSubInput: false
     }
   }
 
@@ -33,7 +23,6 @@ class ParentQ extends Component {
     if(this.props.i){
       this.setState( () => ({
         ...this.props.i,
-        inEdit: false
       }))
     }
 
@@ -57,7 +46,6 @@ class ParentQ extends Component {
   //check each input field for validity...
   handleBlur = (e) => {
 
-    this.state.touched[e.target.name] = true
     this.state.inEdit = true
     let checkVal = this.state[e.target.name]
     let isfieldValid = this.inputValid(checkVal)
@@ -70,13 +58,17 @@ class ParentQ extends Component {
           isValid : true,
           inEdit : false
         }))
+
         this.props.addParentInput({
-          question: this.state.question,
-          type: this.state.type
+          ...this.props.i,
+            ['question']:this.state.question,
+            ['type']:this.state.type
         })
+
         this.setState(()=>({
-          ...defaultState
+          inEdit: false
         }))
+
       } else {
         return false
       }
@@ -105,10 +97,16 @@ class ParentQ extends Component {
     }))
   }
 
+  addSubInput(){
+    this.setState(()=>({
+      addSubInput: true
+    }))
+  }
+
 
   render () {
 
-    const { i, addParentInput } = this.props
+    const { i, addParentInput, addSubInput } = this.props
 
       return (
         <div>
@@ -145,12 +143,24 @@ class ParentQ extends Component {
                 </div>
               : <div>
                   <button className='btn h5'>Delete</button>
-                  <button className='btn h5'>Add Sub-Input</button>
+                  <button className='btn h5' onClick={()=>this.addSubInput()}>Add Sub-Input</button>
                 </div>
             }
            </div>
+
+           { this.state.addSubInput && (
+
+              <div style={{marginLeft: 20 + 'px'}}>
+               <NewSubQ
+                  parent={i}
+                  addSubInput={addSubInput}
+                />
+              </div>
+            )}
+
             { i && i.subQs && (
               <SubQS
+                addSubInput={addSubInput}
                 children={i.subQs}
                 parenQAnswers={i.parenQAnswers}
                 indentVal={0}
